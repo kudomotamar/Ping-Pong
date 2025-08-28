@@ -16,7 +16,15 @@ func _ready():
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
-		velocity = velocity.bounce(collision.get_normal())
+		if collision.get_collider().is_in_group("paddle"):
+			# Bounce depending on where it hit the paddle
+			var paddle = collision.get_collider()
+			var y_offset = (position.y - paddle.position.y) / (paddle.shape_owner_get_shape(0, 0).get_size().y / 2.0)
+			velocity = Vector2(sign(velocity.x), y_offset).normalized() * speed
+		else:
+			# Normal wall bounce
+			velocity = velocity.bounce(collision.get_normal())
+
 
 	trail.emitting = velocity.length() > 0
 

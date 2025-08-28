@@ -6,8 +6,6 @@
 height = 126.0
 
 [node name="left" type="CharacterBody2D"]
-collision_layer = 3
-collision_mask = 3
 script = ExtResource("1_ugf6b")
 
 [node name="ColorRect" type="ColorRect" parent="."]

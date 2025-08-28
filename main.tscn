@@ -16,13 +16,11 @@ size = Vector2(17, 669)
 position = Vector2(590, 315)
 
 [node name="left" parent="." instance=ExtResource("2_h2yge")]
-position = Vector2(78, 241)
-platform_on_leave = 2
-platform_floor_layers = 4294967040
+position = Vector2(78, 328)
 is_right = false
 
 [node name="right" parent="." instance=ExtResource("2_h2yge")]
-position = Vector2(1083, 354)
+position = Vector2(1083, 322)
 rotation = 3.14159
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
