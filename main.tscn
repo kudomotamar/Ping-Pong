@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj85lj05xqet6"]
+
+[ext_resource type="PackedScene" uid="uid://bxi0ovcyiarya" path="res://ball.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bxin7dna8fc5u" path="res://left.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://di1lapu65o8ra" path="res://canvas_layer.gd" id="3_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(1166, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(17, 669)
+
+[node name="Main" type="Node2D"]
+
+[node name="ball" parent="." instance=ExtResource("1_0xm2m")]
+position = Vector2(590, 315)
+
+[node name="left" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(78, 241)
+platform_on_leave = 2
+platform_floor_layers = 4294967040
+is_right = false
+
+[node name="right" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(1083, 354)
+rotation = 3.14159
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(573, -12)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(580, 657)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="left_score" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_score"]
+position = Vector2(-25.5, 324.5)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="right_score" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_score"]
+position = Vector2(1181, 324.5)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_h2yge")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_right = 1.0
+offset_bottom = 23.0
+size_flags_horizontal = 4
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="left_score" to="ball" method="_on_left_score_body_entered"]
+[connection signal="body_entered" from="right_score" to="ball" method="_on_right_score_body_entered"]
